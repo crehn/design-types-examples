@@ -22,7 +22,7 @@ public class LifeExpectancyCalculator {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/{insureeNumber}/residualLifeExpectancy")
-	public String getResidualLifeExpecantcy(@PathParam("insureeNumber") String insureeNumber) {
+	public String getResidualLifeExpecancy(@PathParam("insureeNumber") String insureeNumber) {
 		InsureeData insureeData = insureeDataService.getBy(insureeNumber);
 
 		return getResidualLifeExpecantcy(insureeData).toString();
