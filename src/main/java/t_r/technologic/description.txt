@@ -1,0 +1,2 @@
+This examples focus on usage and combination of several libraries in this task. 
+Often less own classes are needed but the integration/glue code looks not that pretty or can be hard to understand (often several coding styles are mixed). 

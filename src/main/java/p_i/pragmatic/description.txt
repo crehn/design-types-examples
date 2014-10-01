@@ -1,0 +1,1 @@
+This examples just solves the task to calculate without any respect to additional objects like a human entity.

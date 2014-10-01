@@ -1,0 +1,2 @@
+This examples focus on defensive programming as well as transparency for operators by logging sufficient information and by using comments.
+It normally concerns about simple and decoupled units to easily find solutions for occurring bugs. 

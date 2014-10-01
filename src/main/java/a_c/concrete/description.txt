@@ -1,0 +1,2 @@
+This examples focus on the technical environment first. The calculation is provided as a kind of spring service that consumes the life expectancy tables in a flexible way via DAO from a DB.
+Most entities are used as data container only behavior is offered by a technical service.         
