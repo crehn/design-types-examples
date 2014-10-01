@@ -1,4 +1,4 @@
-package net.designtypes.examples.simple;
+package net.designtypes.examples.simple.model;
 
 public enum SmokingHabit {
 	NON_SMOKER(0.0),

@@ -1,14 +1,19 @@
-package net.designtypes.examples.simple;
+package net.designtypes.examples.simple.rest;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+import net.designtypes.examples.simple.base.*;
+import net.designtypes.examples.simple.model.InsureeData;
+import net.designtypes.examples.simple.model.SmokingHabit;
 
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 
 @Path("/insurees")
 public class LifeExpectancyCalculator {
+	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LifeExpectancyCalculator.class);
 
 	@Inject
 	private StatisticsTable statistics;
@@ -23,9 +28,11 @@ public class LifeExpectancyCalculator {
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/{insureeNumber}/residualLifeExpectancy")
 	public String getResidualLifeExpecancy(@PathParam("insureeNumber") String insureeNumber) {
+		log.info("get life expectency for insuree: " + insureeNumber);
 		InsureeData insureeData = insureeDataService.getBy(insureeNumber);
-
-		return getResidualLifeExpecantcy(insureeData).toString();
+		String result = getResidualLifeExpecantcy(insureeData).toString();
+		log.info("got life expectency for insuree [" + insureeNumber + "]: " + result);
+		return result;
 	}
 
 	private Double getResidualLifeExpecantcy(InsureeData insureeData) {
@@ -46,6 +53,7 @@ public class LifeExpectancyCalculator {
 			return residualLifeExpectancy;
 
 		double reduction = smokingHabit.getLifeExpectancyReduction();
+		log.debug("reduce life expectancy by [{}] due to smoking", reduction);
 		return residualLifeExpectancy - reduction;
 	}
 }

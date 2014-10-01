@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.designtypes.examples.my.MySolution;
+import net.designtypes.examples.robust.RobustSolution;
+import net.designtypes.examples.simple.SimpleSolution;
 
 import org.junit.Before;
 
@@ -16,6 +18,7 @@ public abstract class AbstractResidualLifeExpectancyTest {
 	@Before
 	public void setup() {
 		solutions.add(new MySolution());
-		// addSimpleSolution();
+		solutions.add(new SimpleSolution());
+		solutions.add(new RobustSolution());
 	}
 }

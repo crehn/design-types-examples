@@ -1,48 +1,50 @@
-package net.designtypes.examples.simple;
+package net.designtypes.examples.robust;
 
 import static net.designtypes.examples.DummyData.*;
 import static org.mockito.Mockito.*;
+
+import java.rmi.RemoteException;
+
 import net.designtypes.examples.SmokingHabitTestType;
 import net.designtypes.examples.Solution;
-import net.designtypes.examples.simple.base.*;
-import net.designtypes.examples.simple.model.InsureeData;
-import net.designtypes.examples.simple.model.SmokingHabit;
-import net.designtypes.examples.simple.rest.LifeExpectancyCalculator;
+import net.designtypes.examples.robust.bean.LifeExpectancyCalculatorImpl;
+import net.designtypes.examples.robust.bean.local.*;
+import net.designtypes.examples.robust.model.*;
 
 import org.joda.time.LocalDate;
 import org.mockito.*;
 
-public class SimpleSolution extends Solution {
-	
+public class RobustSolution extends Solution {
+
 	@InjectMocks
-	private LifeExpectancyCalculator calculator;
+	private LifeExpectancyCalculatorImpl calculator;
 	@Spy
 	private StatisticsTable statistics;
 	@Mock
 	private InsureeDataServiceGateway insureeData;
 	@Mock
 	private SystemTimeGateway time;
-
-	public SimpleSolution() {
-		MockitoAnnotations.initMocks(this);
-		when(time.now()).thenReturn(NOW);
-	}
 	
+	public RobustSolution() {
+		MockitoAnnotations.initMocks(this);
+		when(time.now()).thenReturn(NOW.toDate());
+	}
+
 	@Override
 	public String getName() {
-		return "simple";
+		return "robust";
 	}
-
+	
 	@Override
 	public void given50YearOldMaleInsuree(SmokingHabitTestType smokingHabit) {
 		InsureeData insuree = new InsureeData(INSUREE_NUMBER);
-		insuree.setBirthday(NOW.minusYears(50));
-		insuree.setMale(true);
-		insuree.setSmokingHabit(toSimple(smokingHabit));
+		insuree.setBirthday(NOW.minusYears(50).toDate());
+		insuree.setGender(Gender.MALE);
+		insuree.setSmokingHabit(toRobust(smokingHabit));
 		when(insureeData.getBy(INSUREE_NUMBER)).thenReturn(insuree);
 	}
-	
-	private SmokingHabit toSimple(SmokingHabitTestType smokingHabit) {
+
+	private SmokingHabit toRobust(SmokingHabitTestType smokingHabit) {
 		switch (smokingHabit) {
 		case NON_SMOKER:
 			return SmokingHabit.NON_SMOKER;
@@ -57,30 +59,34 @@ public class SimpleSolution extends Solution {
 		}
 		throw new RuntimeException();
 	}
-
+	
 	@Override
 	public void givenInsuree(LocalDate dateOfBirth, GenderTestType gender) {
 		InsureeData insuree = new InsureeData(INSUREE_NUMBER);
-		insuree.setBirthday(dateOfBirth);
-		insuree.setMale(toSimple(gender));
+		insuree.setBirthday(dateOfBirth.toDate());
+		insuree.setGender(toRobust(gender));
 		when(insureeData.getBy(INSUREE_NUMBER)).thenReturn(insuree);
 	}
-
-	private Boolean toSimple(GenderTestType gender) {
+	
+	private Gender toRobust(GenderTestType gender) {
 		if (gender == null)
 			return null;
-
+		
 		switch (gender) {
 		case MALE:
-			return true;
+			return Gender.MALE;
 		case FEMALE:
-			return false;
+			return Gender.FEMALE;
 		}
 		throw new RuntimeException();
 	}
-	
+
 	@Override
 	public double getResidualLifeExpecancy(String insureeNumber) {
-		return Double.parseDouble(calculator.getResidualLifeExpecancy(insureeNumber));
+		try {
+			return calculator.getResidualLifeExpecancy(insureeNumber);
+		} catch (RemoteException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

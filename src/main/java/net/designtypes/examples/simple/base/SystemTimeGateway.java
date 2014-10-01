@@ -1,4 +1,4 @@
-package net.designtypes.examples.simple;
+package net.designtypes.examples.simple.base;
 
 import org.joda.time.LocalDate;
 

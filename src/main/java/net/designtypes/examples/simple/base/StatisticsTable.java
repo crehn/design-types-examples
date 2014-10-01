@@ -1,13 +1,13 @@
-package net.designtypes.examples.simple;
+package net.designtypes.examples.simple.base;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class StatisticsTable {
-	
+
 	private static Map<Integer, Double> MALE = new HashMap<>();
 	private static Map<Integer, Double> FEMALE = new HashMap<>();
-	
+
 	static {
 		MALE.put(0, 77.72);
 		MALE.put(1, 77.02);
@@ -111,7 +111,7 @@ public class StatisticsTable {
 		MALE.put(99, 2.10);
 		MALE.put(100, 1.98);
 	}
-
+	
 	static {
 		FEMALE.put(0, 82.73);
 		FEMALE.put(1, 81.99);
@@ -215,9 +215,9 @@ public class StatisticsTable {
 		FEMALE.put(99, 2.28);
 		FEMALE.put(100, 2.14);
 	}
-	
-	public double getResidualLifeExpectancy(int age, boolean isMale) {
-		if (!isMale)
+
+	public double getResidualLifeExpectancy(int age, Boolean isMale) {
+		if (isMale != null && !isMale)
 			return FEMALE.get(age);
 		else
 			return MALE.get(age);

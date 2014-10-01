@@ -1,11 +1,11 @@
-package net.designtypes.examples.simple;
+package net.designtypes.examples.robust.model;
 
-import org.joda.time.LocalDate;
+import java.util.Date;
 
 public class InsureeData {
 	private String insureeNumber;
-	private boolean isMale;
-	private LocalDate birthday;
+	private Gender gender;
+	private Date birthday;
 	private SmokingHabit smokingHabit;
 
 	public InsureeData(String insureeNumber) {
@@ -20,19 +20,19 @@ public class InsureeData {
 		this.insureeNumber = insureeNumber;
 	}
 	
-	public boolean isMale() {
-		return isMale;
+	public Gender getGender() {
+		return gender;
 	}
 	
-	public void setMale(boolean isMale) {
-		this.isMale = isMale;
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 	
-	public LocalDate getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 	
-	public void setBirthday(LocalDate birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 	
