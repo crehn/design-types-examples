@@ -1,14 +1,16 @@
-package net.designtypes.examples.robust.bean.local;
+package net.designtypes.examples.powerful.data.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.ejb.Local;
+import net.designtypes.examples.powerful.data.StatisticsDataStore;
+import net.designtypes.examples.powerful.model.Gender;
+import net.designtypes.examples.technologic.lib.Logged;
 
-import net.designtypes.examples.robust.model.Gender;
+import org.joda.time.Years;
 
-@Local
-public class StatisticsTable {
+@Logged
+public class InMemoryStatisticsDataStore implements StatisticsDataStore {
 
 	private static Map<Integer, Double> MALE = new HashMap<>();
 	private static Map<Integer, Double> FEMALE = new HashMap<>();
@@ -221,17 +223,11 @@ public class StatisticsTable {
 		FEMALE.put(100, 2.14);
 	}
 
-	public double getResidualLifeExpectancy(int age, Gender gender) {
-		if (gender == null)
-			return MALE.get(age);
-		
-		switch (gender) {
-		case MALE:
-			return MALE.get(age);
-		case FEMALE:
-			return FEMALE.get(age);
-		default:
-			return MALE.get(age);
-		}
+	@Override
+	public double getResidualLifeExpectancy(Years age, Gender gender) {
+		if (gender == Gender.FEMALE)
+			return FEMALE.get(age.getYears());
+		else
+			return MALE.get(age.getYears());
 	}
 }

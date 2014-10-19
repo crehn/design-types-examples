@@ -16,7 +16,7 @@ public class ResidualLifeExpectancySmokingTest extends AbstractResidualLifeExpec
 		for (Solution solution : solutions) {
 			solution.given50YearOldMaleInsuree(NON_SMOKER);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 			
 			assertEquals(29.67, result, EPSILON);
 		}
@@ -27,7 +27,7 @@ public class ResidualLifeExpectancySmokingTest extends AbstractResidualLifeExpec
 		for (Solution solution : solutions) {
 			solution.given50YearOldMaleInsuree(STOPPED_SMOKING);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 			
 			assertEquals(27.67, result, EPSILON);
 		}
@@ -38,7 +38,7 @@ public class ResidualLifeExpectancySmokingTest extends AbstractResidualLifeExpec
 		for (Solution solution : solutions) {
 			solution.given50YearOldMaleInsuree(LESS_THAN_5_CIGARETTES_PER_DAY);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 			
 			assertEquals(24.97, result, EPSILON);
 		}
@@ -49,7 +49,7 @@ public class ResidualLifeExpectancySmokingTest extends AbstractResidualLifeExpec
 		for (Solution solution : solutions) {
 			solution.given50YearOldMaleInsuree(LESS_THAN_20_CIGARETTES_PER_DAY);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 
 			assertEquals(21.37, result, EPSILON);
 		}
@@ -60,7 +60,7 @@ public class ResidualLifeExpectancySmokingTest extends AbstractResidualLifeExpec
 		for (Solution solution : solutions) {
 			solution.given50YearOldMaleInsuree(MORE_THAN_20_CIGARETTES_PER_DAY);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 			
 			assertEquals(19.57, result, EPSILON);
 		}

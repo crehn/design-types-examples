@@ -1,50 +1,50 @@
-package net.designtypes.examples.robust;
+package net.designtypes.examples.technologic;
 
 import static net.designtypes.examples.DummyData.*;
 import static org.mockito.Mockito.*;
-
-import java.rmi.RemoteException;
-
 import net.designtypes.examples.SmokingHabitTestType;
 import net.designtypes.examples.Solution;
-import net.designtypes.examples.robust.bean.LifeExpectancyCalculatorImpl;
-import net.designtypes.examples.robust.bean.local.*;
-import net.designtypes.examples.robust.model.*;
+import net.designtypes.examples.technologic.control.LifeExpectancyFacade;
+import net.designtypes.examples.technologic.data.StatisticsDataStore;
+import net.designtypes.examples.technologic.gateway.InsureeDataServiceGateway;
+import net.designtypes.examples.technologic.gateway.SystemTimeGateway;
+import net.designtypes.examples.technologic.model.*;
 
 import org.joda.time.LocalDate;
 import org.mockito.*;
 
-public class RobustSolution extends Solution {
+public class TechnologicSolution extends Solution {
 
 	@InjectMocks
-	private LifeExpectancyCalculatorImpl calculator;
+	private LifeExpectancyFacade facade;
 	@Spy
-	private StatisticsTable statistics;
+	private StatisticsDataStore store;
 	@Mock
 	private InsureeDataServiceGateway insureeData;
 	@Mock
 	private SystemTimeGateway time;
-	
-	public RobustSolution() {
-		MockitoAnnotations.initMocks(this);
-		when(time.now()).thenReturn(NOW.toDate());
-	}
 
+	public TechnologicSolution() {
+		MockitoAnnotations.initMocks(this);
+		when(time.now()).thenReturn(NOW);
+	}
+	
 	@Override
 	public String getName() {
-		return "robust";
+		return "technologic";
 	}
 	
 	@Override
 	public void given50YearOldMaleInsuree(SmokingHabitTestType smokingHabit) {
-		InsureeData insuree = new InsureeData(INSUREE_NUMBER);
-		insuree.setBirthday(NOW.minusYears(50).toDate());
-		insuree.setGender(Gender.MALE);
-		insuree.setSmokingHabit(toRobust(smokingHabit));
-		when(insureeData.getBy(INSUREE_NUMBER)).thenReturn(insuree);
+		Insuree insuree = Insuree.builder() //
+				.birthday(NOW.minusYears(50)) //
+				.gender(toTechnologic(GenderTestType.MALE)) //
+				.smokingHabit(toTechnologic(smokingHabit)) //
+				.build();
+		when(insureeData.getBy(new InsureeNumber(INSUREE_NUMBER))).thenReturn(insuree);
 	}
 
-	private SmokingHabit toRobust(SmokingHabitTestType smokingHabit) {
+	private SmokingHabit toTechnologic(SmokingHabitTestType smokingHabit) {
 		switch (smokingHabit) {
 		case NON_SMOKER:
 			return SmokingHabit.NON_SMOKER;
@@ -59,16 +59,17 @@ public class RobustSolution extends Solution {
 		}
 		throw new RuntimeException();
 	}
-	
+
 	@Override
 	public void givenInsuree(LocalDate dateOfBirth, GenderTestType gender) {
-		InsureeData insuree = new InsureeData(INSUREE_NUMBER);
-		insuree.setBirthday(dateOfBirth.toDate());
-		insuree.setGender(toRobust(gender));
-		when(insureeData.getBy(INSUREE_NUMBER)).thenReturn(insuree);
+		Insuree insuree = Insuree.builder() //
+				.birthday(dateOfBirth) //
+				.gender(toTechnologic(gender)) //
+				.build();
+		when(insureeData.getBy(new InsureeNumber(INSUREE_NUMBER))).thenReturn(insuree);
 	}
 	
-	private Gender toRobust(GenderTestType gender) {
+	private Gender toTechnologic(GenderTestType gender) {
 		if (gender == null)
 			return null;
 		
@@ -83,10 +84,6 @@ public class RobustSolution extends Solution {
 
 	@Override
 	public double getResidualLifeExpectancy(String insureeNumber) {
-		try {
-			return calculator.getResidualLifeExpecancy(insureeNumber);
-		} catch (RemoteException e) {
-			throw new RuntimeException(e);
-		}
+		return facade.getResidualLifeExpecantcy(new InsureeNumber(insureeNumber));
 	}
 }

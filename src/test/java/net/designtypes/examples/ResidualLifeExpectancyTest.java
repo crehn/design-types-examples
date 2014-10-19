@@ -16,7 +16,7 @@ public class ResidualLifeExpectancyTest extends AbstractResidualLifeExpectancyTe
 		for (Solution solution : solutions) {
 			solution.givenInsuree(NOW, MALE);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 
 			assertEquals(77.72, result, EPSILON);
 		}
@@ -27,7 +27,7 @@ public class ResidualLifeExpectancyTest extends AbstractResidualLifeExpectancyTe
 		for (Solution solution : solutions) {
 			solution.givenInsuree(NOW.minusYears(100), MALE);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 
 			assertEquals(1.98, result, EPSILON);
 		}
@@ -38,7 +38,7 @@ public class ResidualLifeExpectancyTest extends AbstractResidualLifeExpectancyTe
 		for (Solution solution : solutions) {
 			solution.givenInsuree(NOW.minusYears(50), MALE);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 			
 			assertEquals(29.67, result, EPSILON);
 		}
@@ -49,7 +49,7 @@ public class ResidualLifeExpectancyTest extends AbstractResidualLifeExpectancyTe
 		for (Solution solution : solutions) {
 			solution.givenInsuree(NOW, FEMALE);
 
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 
 			assertEquals(82.73, result, EPSILON);
 		}
@@ -60,7 +60,7 @@ public class ResidualLifeExpectancyTest extends AbstractResidualLifeExpectancyTe
 		for (Solution solution : solutions) {
 			solution.givenInsuree(NOW.minusYears(100), FEMALE);
 
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 
 			assertEquals(2.14, result, EPSILON);
 		}
@@ -71,7 +71,7 @@ public class ResidualLifeExpectancyTest extends AbstractResidualLifeExpectancyTe
 		for (Solution solution : solutions) {
 			solution.givenInsuree(NOW.minusYears(50), FEMALE);
 
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 
 			assertEquals(33.98, result, EPSILON);
 		}
@@ -82,7 +82,7 @@ public class ResidualLifeExpectancyTest extends AbstractResidualLifeExpectancyTe
 		for (Solution solution : solutions) {
 			solution.givenInsuree(NOW.minusYears(50), null);
 			
-			double result = solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+			double result = solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 			
 			assertEquals(29.67, result, EPSILON);
 		}
@@ -94,7 +94,7 @@ public class ResidualLifeExpectancyTest extends AbstractResidualLifeExpectancyTe
 			try {
 				solution.givenInsuree(null, MALE);
 				
-				solution.getResidualLifeExpecancy(INSUREE_NUMBER);
+				solution.getResidualLifeExpectancy(INSUREE_NUMBER);
 				fail("expected exception for solution " + solution.getName());
 			} catch (Exception e) {
 				// ok

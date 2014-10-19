@@ -1,0 +1,1 @@
+This is the solution I used to derive the dimensions from. Not particularly interesting. Rather an intermediate product.

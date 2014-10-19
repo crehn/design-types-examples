@@ -10,10 +10,10 @@ public abstract class Solution {
 	
 	public abstract String getName();
 
-	public abstract double getResidualLifeExpecancy(String insureeNumber);
+	public abstract double getResidualLifeExpectancy(String insureeNumber);
 	
-	public abstract void givenInsuree(LocalDate dateOfBirth, GenderTestType male);
+	public abstract void givenInsuree(LocalDate dateOfBirth, GenderTestType gender);
 	
-	public abstract void given50YearOldMaleInsuree(SmokingHabitTestType stoppedSmoking);
+	public abstract void given50YearOldMaleInsuree(SmokingHabitTestType smokingHabit);
 
 }

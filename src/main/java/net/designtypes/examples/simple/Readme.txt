@@ -1,0 +1,2 @@
+ - REST is much easier than SOAP
+ - There is no need to separate REST boundary from business logic. So don't do that.

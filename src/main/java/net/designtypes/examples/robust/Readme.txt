@@ -1,0 +1,3 @@
+ - Our team has used RMI successfully in another project. So we'll stick to RMI.
+ - Slf4j may be newer but Log4j works just fine for us.
+ - Calendar and Date were used in the library. No need to change the code to use JodaTime or some other library.

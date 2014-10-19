@@ -80,7 +80,7 @@ public class SimpleSolution extends Solution {
 	}
 	
 	@Override
-	public double getResidualLifeExpecancy(String insureeNumber) {
+	public double getResidualLifeExpectancy(String insureeNumber) {
 		return Double.parseDouble(calculator.getResidualLifeExpecancy(insureeNumber));
 	}
 }

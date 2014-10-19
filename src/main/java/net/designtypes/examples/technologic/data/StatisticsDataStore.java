@@ -3,17 +3,17 @@ package net.designtypes.examples.technologic.data;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.designtypes.examples.my.model.Gender;
 import net.designtypes.examples.technologic.lib.Logged;
+import net.designtypes.examples.technologic.model.Gender;
 
 import org.joda.time.Years;
 
 @Logged
 public class StatisticsDataStore {
-
+	
 	private static Map<Integer, Double> MALE = new HashMap<>();
 	private static Map<Integer, Double> FEMALE = new HashMap<>();
-
+	
 	static {
 		MALE.put(0, 77.72);
 		MALE.put(1, 77.02);
@@ -117,7 +117,7 @@ public class StatisticsDataStore {
 		MALE.put(99, 2.10);
 		MALE.put(100, 1.98);
 	}
-	
+
 	static {
 		FEMALE.put(0, 82.73);
 		FEMALE.put(1, 81.99);
@@ -221,7 +221,7 @@ public class StatisticsDataStore {
 		FEMALE.put(99, 2.28);
 		FEMALE.put(100, 2.14);
 	}
-
+	
 	public double getResidualLifeExpectancy(Years age, Gender gender) {
 		if (gender == Gender.FEMALE)
 			return FEMALE.get(age.getYears());

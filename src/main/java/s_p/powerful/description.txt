@@ -1,5 +1,0 @@
-This examples demonstrates that several things can be handled in a flexible way and can be extended easily without changing the interface/api.
-The calculation method takes an interface to retrieve the static life expectancy. This can be exchanged easily by passing another object that also implements the same interface.
-A context object is used to add additional calculation relevant details. This can also be changed without changing the signature of the calculation method.
-An object for personal attributes is introduced to delegate one part of the calculation to mandatory subclasses like a woman or a man that can have several individual 
-attributes that have effect on their life expectancy.     

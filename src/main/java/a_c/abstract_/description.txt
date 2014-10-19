@@ -1,3 +1,0 @@
-This examples demonstrates the modeling of all entities in play. There is no technical helper but well identified and self explaining entities that are related in a natural way.
-The calculation is moved to the entity LifeExpectancy that will be actualized or better reinitialized when a man or a woman changes its personal attributes. 
-The personal attributes are not too generic like in the powerful example. No further abstraction is missing.         

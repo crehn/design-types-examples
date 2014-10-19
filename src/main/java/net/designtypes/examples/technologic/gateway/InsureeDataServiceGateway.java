@@ -1,9 +1,9 @@
 package net.designtypes.examples.technologic.gateway;
 
-import static net.designtypes.examples.my.model.Gender.*;
-import net.designtypes.examples.my.model.Insuree;
-import net.designtypes.examples.my.model.InsureeNumber;
+import static net.designtypes.examples.technologic.model.Gender.*;
 import net.designtypes.examples.technologic.lib.Logged;
+import net.designtypes.examples.technologic.model.Insuree;
+import net.designtypes.examples.technologic.model.InsureeNumber;
 
 import org.joda.time.LocalDate;
 

@@ -1,2 +1,0 @@
-This examples solves the task quite simple. There is only one entity that could be maybe separated in several entities but there is actually no need for doing it.
-The calculation is also not that flexible and contains hardcoded literals but there is also actually no need to change it.

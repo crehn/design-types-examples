@@ -1,20 +1,25 @@
-package net.designtypes.examples.technologic.control;
+package net.designtypes.examples.powerful.core.impl;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
 
-import lombok.extern.slf4j.Slf4j;
-import net.designtypes.examples.technologic.data.StatisticsDataStore;
-import net.designtypes.examples.technologic.gateway.InsureeDataServiceGateway;
-import net.designtypes.examples.technologic.gateway.SystemTimeGateway;
-import net.designtypes.examples.technologic.lib.Logged;
-import net.designtypes.examples.technologic.model.Insuree;
-import net.designtypes.examples.technologic.model.InsureeNumber;
+import net.designtypes.examples.powerful.core.LifeExpectancyFacade;
+import net.designtypes.examples.powerful.data.StatisticsDataStore;
+import net.designtypes.examples.powerful.gateway.InsureeDataServiceGateway;
+import net.designtypes.examples.powerful.gateway.SystemTimeGateway;
+import net.designtypes.examples.powerful.lib.Logged;
+import net.designtypes.examples.powerful.model.Insuree;
+import net.designtypes.examples.powerful.model.InsureeNumber;
 
 import org.joda.time.Years;
 
-@Slf4j
 @Logged
-public class LifeExpectancyFacade {
+@Stateless
+@WebService
+public class LifeExpectancyFacadeImpl implements LifeExpectancyFacade {
+	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LifeExpectancyFacadeImpl.class);
 
 	@Inject
 	private InsureeDataServiceGateway insureeData;
@@ -25,7 +30,9 @@ public class LifeExpectancyFacade {
 	@Inject
 	private SystemTimeGateway time;
 	
-	public double getResidualLifeExpecantcy(InsureeNumber insureeNumber) {
+	@Override
+	@WebMethod
+	public double getResidualLifeExpectancy(InsureeNumber insureeNumber) {
 		Insuree insuree = insureeData.getBy(insureeNumber);
 
 		return getResidualLifeExpectancy(insuree);

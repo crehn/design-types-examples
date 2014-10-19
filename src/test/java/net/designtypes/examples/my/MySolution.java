@@ -83,7 +83,7 @@ public class MySolution extends Solution {
 	}
 
 	@Override
-	public double getResidualLifeExpecancy(String insureeNumber) {
+	public double getResidualLifeExpectancy(String insureeNumber) {
 		return facade.getResidualLifeExpecantcy(new InsureeNumber(insureeNumber));
 	}
 }
